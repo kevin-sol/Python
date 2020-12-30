@@ -1,0 +1,35 @@
+
+time库
+    计算机时间的表达
+    提供获取系统时间并格式化输出功能
+    提供系统级精确计时功能，用于程序性分析
+
+time库包括三类函数
+    时间获取：   time()  ctime()  gmtime()
+    时间格式化：  strftime()  strptime()
+    程序计时：    sleep()   perf_counter()
+
+        time()      获取当前时间戳，即计算机内部时间值，浮点数
+                        >>> time.time()
+                        1609317852.4689517
+        ctime()    获取当前时间并以易读方式表示，返回字符串
+                        >>> time.ctime()
+                        'Wed Dec 30 16:45:59 2020'
+        gmtime()    获取当前时间，表示为计算机可处理的时间格式
+                        >>> time.gmtime()
+                        time.struct_time(tm_year=2020, tm_mon=12, tm_mday=30, tm_hour=8, tm_min=48, tm_sec=13, tm_wday=2, tm_yday=365, tm_isdst=0)
+
+        strftime()  将 gmtime 形式转化为   %Y-%m-%d %H:%M:%S
+                    >>> t=time.gmtime()
+                    >>> time.strftime("%Y-%m-%d %H:%M:%S",t)
+                    '2020-12-30 09:12:49'
+        strptime()  将 %Y-%m-%d %H:%M:%S 形式转化为 gmtime 形式
+                    >>> t="2020-12-30 17:14:16"
+                    >>> time.strptime(t,"%Y-%m-%d %H:%M:%S")
+                    time.struct_time(tm_year=2020, tm_mon=12, tm_mday=30, tm_hour=17, tm_min=14, tm_sec=16, tm_wday=2, tm_yday=365, tm_isdst=-1)
+        perf_counter()   返回一个CPU级别的精确时间计数值，单位为秒
+                         由于这个计数值起点不确定，连续调用差值才有意义
+        sleep()     拟休眠的时间，单位是秒，可以是浮点数
+                    >>> def wait():
+	                        time.sleep(3.3)
+                    >>> wait()   #程序将等待3.3秒后退出
